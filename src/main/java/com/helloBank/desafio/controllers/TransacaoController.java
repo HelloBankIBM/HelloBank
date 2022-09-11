@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.helloBank.desafio.Services.ContaService;
 import com.helloBank.desafio.Services.TransacaoService;
-import com.helloBank.desafio.models.Conta; 
+import com.helloBank.desafio.models.Conta;
 import com.helloBank.desafio.models.Transacao;
 
 @RestController
@@ -25,14 +25,14 @@ public class TransacaoController {
 
     @PostMapping
     public Transacao create(@RequestBody Transacao transacao) {
-        Conta contaDestino = contaService.findById(transacao.getConta().getId());
-        Conta contaOrigem = contaService.findById(transacao.getConta().getId());
+        Conta contaDestino = contaService.findById(transacao.getContaDestino());
+        Conta contaOrigem = contaService.findById(transacao.getContaOrigem());
 
         contaOrigem.setSaldo(contaOrigem.getSaldo() - transacao.getValor());
-        contaService.save(contaOrigem);
-
         contaDestino.setSaldo(contaDestino.getSaldo() + transacao.getValor());
-        contaService.save(contaDestino);
+
+        contaService.update(contaOrigem);
+        contaService.update(contaDestino);
 
         return transacaoService.save(transacao);
     }

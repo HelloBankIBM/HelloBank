@@ -21,4 +21,8 @@ public class ContaService {
     public Conta save(Conta conta) {
         return contaRepository.save(conta);
     }
+
+    public Conta update(Conta conta) {
+        return contaRepository.save(conta);
+    }
 }

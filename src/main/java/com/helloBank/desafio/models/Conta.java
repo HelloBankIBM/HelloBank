@@ -28,9 +28,6 @@ public class Conta {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "conta")
-    private List<Transacao> transacoes;
-
     public Conta(String numero, Cliente cliente) {
         this.numero = numero;
         this.cliente = cliente;
